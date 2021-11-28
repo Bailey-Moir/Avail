@@ -1,3 +1,8 @@
+/**
+ * Command to mute all pariticipants in a call.
+ * @author Bailey Moir <bailey.p.moir@gmail.com>
+ */
+
 import { GuildMember, Message } from "discord.js";
 
 import Embeds from "../../embeds";
@@ -7,7 +12,7 @@ import Command from "../../types/command";
 import config from '../../../config.json';
 
 const command: Command = {
-    callback: (message: Message, args: Array<string>) => {
+    callback: (message: Message, args: string[]) => {
         if (message.member == null) return;
 
         if (!message.member.permissions.has('MUTE_MEMBERS')) {

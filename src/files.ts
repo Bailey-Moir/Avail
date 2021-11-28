@@ -1,6 +1,13 @@
+/**
+ * @see Files
+ * @author Bailey Moir <bailey.p.moir@gmail.com>
+ */
 import { Collection } from "discord.js";
 
-class Files {
+/**
+ * The files that are referenced many times through the program to prevent repeating algorythms to find them.
+ */
+export default class Files {
     /**
      * Key is file, value is folder
      * @type {Collection<string, string>}
@@ -12,5 +19,3 @@ class Files {
      */
     static commandGroups: string[] = [];
 }
-
-export default Files;

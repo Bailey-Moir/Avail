@@ -1,3 +1,7 @@
+/**
+ * Command that tells the user about the commands in the bot.
+ * @author Bailey Moir <bailey.p.moir@gmail.com>
+ */
 import { Message, MessageEmbed } from "discord.js";
 
 import Embeds from "../../embeds";
@@ -8,7 +12,7 @@ import Command from "../../types/command";
 import config from '../../../config.json';
 
 const command: Command = {
-    callback: (message: Message, args: Array<string>) => {
+    callback: (message: Message, args: string[]) => {
         let footer = `To find commands in groups, do ${config.prefix}help <group>\nTo find what a command does, do ${config.prefix}help <command>`;
 
         // If parsing command or group

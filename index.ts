@@ -1,3 +1,7 @@
+/**
+ * The starting off point of the program
+ * @author Bailey Moir <bailey.p.moir@gmail.com>
+ */
 import Discord from 'discord.js';
 import fse from 'fs-extra';
 import config from './config.json';

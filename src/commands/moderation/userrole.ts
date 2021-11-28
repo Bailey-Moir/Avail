@@ -1,3 +1,7 @@
+/**
+ * Command to add a default user to a server/guild.
+ * @author Bailey Moir <bailey.p.moir@gmail.com>
+ */
 import { Guild, GuildMember, Message } from "discord.js";
 import fse from 'fs-extra';
 
@@ -8,7 +12,7 @@ import Command from "../../types/command";
 import config from '../../../config.json';
 
 const command: Command = {
-    callback: function (message: Message, args: Array<string>) {
+    callback: function (message: Message, args: string[]) {
         var guild: Guild = message.guild;
         if (message.member.permissions.has('MANAGE_ROLES')) {
             // e.g. of args[0] '<@&877115627301642250>'

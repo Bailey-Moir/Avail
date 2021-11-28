@@ -1,3 +1,7 @@
+/**
+ * Command that sends a user a meme.
+ * @author Bailey Moir <bailey.p.moir@gmail.com>
+ */
 import { Message, MessageEmbed } from 'discord.js';
 import { meme } from 'memejs';
 
@@ -16,7 +20,7 @@ interface MemeData {
 }
 
 const command: Command = {
-    callback: (message: Message, args: Array<string>) =>
+    callback: (message: Message, args: string[]) =>
         meme( args[0] ?
             (args[0].toLowerCase().startsWith('r/') ?
                 args[0].slice(2).toLowerCase()
@@ -34,8 +38,8 @@ const command: Command = {
                 ).catch(Logs.catcher)
             ).catch(Logs.catcher),
     name: "Meme",
-    description: "Sends a random meme.",
-    example: `${config.prefix}meme\n${config.prefix}meme <?subreddit>`
+    description: "Sends a random meme. If no subreddit is defined, it will use r/dankmemes",
+    example: `${config.prefix}meme <?subreddit>`
 }
 
 module.exports = command;

@@ -11,9 +11,9 @@ export default interface Command {
     /**
      * Function called whenever a user uses the command.
      * @param {Message} message The message that the command was called with.
-     * @param {Array<string>} args The arguments/parameters that the user inputs (e.g. )
+     * @param {string[]} args The arguments/parameters that the user inputs (e.g. )
      */
-    callback: (message: Message, args: Array<string>) => void,
+    callback: (message: Message, args: string[]) => void,
     /**
      * The name of the command. The word that you use to call the function.
      * @type {string}

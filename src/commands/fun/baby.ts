@@ -1,3 +1,7 @@
+/**
+ * Command that tells the user a dead baby joke.
+ * @author Bailey Moir <bailey.p.moir@gmail.com>
+ */
 import { Message } from "discord.js";
 
 import Logs from "../../logs";
@@ -50,7 +54,7 @@ let jokes = [
 ];
 
 const command: Command = {
-    callback: (message: Message, args: Array<string>) => 
+    callback: (message: Message, args: string[]) => 
         message.channel.send(jokes[Math.floor(Math.random() * jokes.length)])
             .catch(Logs.catcher),
     name: "Baby",
