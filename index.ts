@@ -2,7 +2,7 @@
  * The starting off point of the program
  * @author Bailey Moir <bailey.p.moir@gmail.com>
  */
-import Discord from 'discord.js';
+import Discord, { MessageAttachment } from 'discord.js';
 import fse from 'fs-extra';
 import config from './config.json';
 
@@ -11,6 +11,8 @@ import Logs from "./src/logs";
 import Command from "./src/types/command";
 
 const client = new Discord.Client({ fetchAllMembers: true });
+
+let lolRegex = /(!|i|𝖫|l|ӏ|ĺ|ļ|ľ|ł|į|ı|̇|ĭ|ĩ|ɩ|ƚ|ʅ|ȴ|ʟ|˩|յ|ן|ᶖ|ᶅ|ḽ|ḹ|ḻ|ḷ|ỉ|ị|ί|ὶ|ῑ|ῗ|ῖ|ΐ|ῒ|ῐ|ŀ|\\)\s{0,}(ò|ô|ö|ó|õ|ø|ō|ŏ|ő|ǒ|ȍ|ǫ|ǭ|ȫ|ȱ|ȭ|ȯ|ʘ|ό|о|θ|ӧ|օ|۝|ᴏ|ᴑ|ṍ|ṏ|ṑ|ṓ|ọ|ỏ|ố|ồ|ợ|ỡ|ở|ờ|ớ|ộ|ỗ|ὸ|ό|ꝍ|o|0)\s{0,}(!|i|𝖫|l|ӏ|ĺ|ļ|ľ|ł|į|ı|̇|ĭ|ĩ|ɩ|ƚ|ʅ|ȴ|ʟ|˩|յ|ן|ᶖ|ᶅ|ḽ|ḹ|ḻ|ḷ|ỉ|ị|ί|ὶ|ῑ|ῗ|ῖ|ΐ|ῒ|ῐ|ŀ|\\)/gmi
 
 client.on('ready', async () => {
     Logs.print('');
@@ -80,49 +82,50 @@ client.on('messageUpdate', async (oldMessage: Discord.Message, newMessage: Disco
     if (!newMessage.guild) return; // If the guild doesn't exists, don't process.
     if (newMessage.author.bot) return; // If sent by bot, don't process.
 
-    if (newMessage.content.search(/\b(l|i|\\)\s{0,}(o|0)\s{0,}(l|i|\\)\b/gmi) != -1)
+    if (newMessage.content.search(lolRegex) != -1)
         newMessage.delete()
             .catch( (e: Error) => Logs.log(e.stack) );
 });
 
 // Whenever a message is sent, prevent it from being lol, and if it's a command, execute it.
 client.on('message', async (message: Discord.Message) => {
-    let msg = message.content.trim(); // Message without any whitespace on sides.
-    if (!msg.startsWith(config.prefix)) return; // If doesn't start with prefix, don't process.
-
     if (!message.guild) return; // If the message is not from a guild, don't process.
     if (message.author.bot) return; // If sent by bot, don't process.
 
+    let msg = message.content.trim(); // Message without any whitespace on sides.
+    if (!msg.startsWith(config.prefix)) { // If doesn't start with prefix, only do lol.
+        // If contains 'lol' of some kind, delete it and send a **clean** version of the message.
+        if (message.content.search(lolRegex) != -1) {
+            // Delete illegal message.
+            message.delete()
+                .catch(Logs.catcher);
+            // Send replacement message.
+            message.channel.send(`> ${message.content.replace(lolRegex, 'mdr' )}\n${message.author.username}`)
+                .catch(Logs.catcher);
+            
+            // Bully user.
+            message.author.send(new Discord.MessageEmbed()
+                    .setColor('#7900C3')
+                    .setTitle([
+                        'Please refrain from using the word **lol**.',
+                        'Stop saying **lol**, I will slap you.',
+                        'You will die in your sleep if you don\'t :duck:ing stop.',
+                        'Stop.',
+                        'Stfu, no more **lol**s, alright?!',
+                        '**LOL**, IS A SWEAR WORD.',
+                        'STOP IT!',
+                        'Die.'
+                    ][Math.floor(Math.random() * 9)])
+                    .setDescription(`'Lol' is not permited on ${message.guild.name}`)
+                    .setFooter(`Commit die`)
+                    .setTimestamp()
+                ).catch(Logs.catcher);
+        }
+        return
+    }
+
     let args = msg.slice(config.prefix.length) // Message without prefix.
         .split(/\s{1,}/gm) // Splits into array.
-
-    // If contains 'lol' of some kind, delete it and send a **clean⌈** version of the message.
-    if (message.content.search(/\b(l|i|\\)\s{0,}(o|0)\s{0,}(l|i|\\)\b/gmi) != -1) {
-        // Delete illegal message.
-        message.delete()
-            .catch(Logs.catcher);
-        // Send replacement message.
-        message.channel.send(`> ${message.content.replace( /\b(l|i|\\)\s{0,}(o|0)\s{0,}(l|i|\\)\b/gmi, 'mdr' )}\n${message.author.username}`)
-            .catch(Logs.catcher);
-        
-        // Bully user.
-        message.author.send(new Discord.MessageEmbed()
-                .setColor('#7900C3')
-                .setTitle([
-                    'Please refrain from using the word **lol**.',
-                    'Stop saying **lol**, I will slap you.',
-                    'You will die in your sleep if you don\'t :duck:ing stop.',
-                    'Stop.',
-                    'Stfu, no more **lol**s, alright?!',
-                    '**LOL**, IS A SWEAR WORD.',
-                    'STOP IT!',
-                    'Die.'
-                ][Math.floor(Math.random() * 9)])
-                .setDescription(`'Lol' is not permited on ${message.guild.name}`)
-                .setFooter(`Commit die`)
-                .setTimestamp()
-            ).catch(Logs.catcher);
-    }
 
     // Search for command file that matches the inputted command, and execute command if found.
     Files.commands.some( (folder, file) => {

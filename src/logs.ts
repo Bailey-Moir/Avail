@@ -7,7 +7,7 @@ import fse from 'fs-extra';
 /**
  * Long term data storage that saves information about errors and such inlcuding after session.
  */
- export default class Logs {
+export default class Logs {
     /**
      * Logs raw text to the console.
      * @param {string} input The text to log.
@@ -23,14 +23,17 @@ import fse from 'fs-extra';
      */
     static log(input: string) {
         let date = new Date();
-        this.print(`[${ date.getDate() }/${ date.getMonth() }/${ date.getFullYear() }, ${ date.getUTCHours() + 1 }:${ date.getUTCMinutes() }:${ date.getUTCSeconds() }] ${ input }`)
+        fse.appendFile("logs.txt", `\n[${ date.getDate() }/${ date.getMonth() }/${ date.getFullYear() }, ${ date.getUTCHours() + 1 }:${ date.getUTCMinutes() }:${ date.getUTCSeconds() }] ${ input }`);
+        console.log(`[${ date.getDate() }/${ date.getMonth() }/${ date.getFullYear() }, ${ date.getUTCHours() + 1 }:${ date.getUTCMinutes() }:${ date.getUTCSeconds() }] ${ input }`);
     }
     
     /**
      * Used to handle promise rejections.
-     * @param reason Promise rejection reasoning
+     * @param {any} reason Promise rejection reasoning
      */
     static catcher(reason: any) {
-        this.log(reason);
+        let date = new Date();
+        fse.appendFile("logs.txt", `\n[${ date.getDate() }/${ date.getMonth() }/${ date.getFullYear() }, ${ date.getUTCHours() + 1 }:${ date.getUTCMinutes() }:${ date.getUTCSeconds() }] ${ reason }`);
+        console.log(`[${ date.getDate() }/${ date.getMonth() }/${ date.getFullYear() }, ${ date.getUTCHours() + 1 }:${ date.getUTCMinutes() }:${ date.getUTCSeconds() }] ${ reason }`);
     }
 }
