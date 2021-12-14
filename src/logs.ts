@@ -58,7 +58,7 @@ export default class logs {
                         content: message.content,
                         authorName: message.author.username,
                         authorIcon: message.author.avatarURL(),
-                        timestamp: message.createdTimestamp,
+                        sent: message.createdTimestamp,
                         authorID: message.author.id
                     }
                 })

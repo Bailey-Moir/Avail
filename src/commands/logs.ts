@@ -7,7 +7,7 @@ import fs from 'fs-extra';
 
 import Command, { CommandCatergory } from "../types/command";
 import Embeds from "../embeds";
-import { LogType, log } from "../logs";
+import { LogType, log } from "../types/logTypes";
  
 import config from '../../config.json';
 import { dateToString } from "../utils";
@@ -27,7 +27,7 @@ const command: Command = {
                                 .setColor(Embeds.colour)
                                 .setAuthor(log.authorName, log.authorIcon)
                                 .setTitle(`Deletion`)
-                                .setDescription(`**Message by <@${log.authorID}> deleted by somebody in <#${log.channelID}>**\n> ${log.content.split("\n").join("\n> ")}\n\nSent: ${dateToString(log.timestamp)}`)
+                                .setDescription(`**Message by <@${log.authorID}> deleted by somebody in <#${log.channelID}>**\n> ${log.content.split("\n").join("\n> ")}\n\nSent: ${dateToString(log.sent)}`)
                                 .setTimestamp(log.acted)
                             );
                             break;
@@ -37,7 +37,7 @@ const command: Command = {
                                     .setColor(Embeds.colour)
                                     .setAuthor(data.authorName, data.authorIcon)
                                     .setTitle('Deletion')
-                                    .setDescription(`**Message by <@${data.authorID}> deleted by somebody in <#${log.channelID}>**\n> ${data.content.split("\n").join("\n> ")}\n\nSent at ${dateToString(data.timestamp)}`)
+                                    .setDescription(`**Message by <@${data.authorID}> deleted by somebody in <#${log.channelID}>**\n> ${data.content.split("\n").join("\n> ")}\n\nSent at ${dateToString(data.sent)}`)
                                     .setTimestamp(log.acted)
                                 )
                             });
