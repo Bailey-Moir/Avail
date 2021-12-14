@@ -6,19 +6,19 @@
   "types": "index.d.ts",
   "scripts": {
     "start": "ts-node index.ts",
-    "admin": "ts-node admin.ts",
-    "noadmin": "ts-node noadmin.ts",
     "start-dev": "nodemon --ignore 'data.json' index.ts"
   },
   "author": "Bailey Moir (Charps)",
   "license": "ISC",
   "dependencies": {
-    "@discordjs/opus": "^0.6.0",
+    "@discordjs/opus": "github:discordjs/opus",
     "discord.js": "^12.5.3",
     "fs": "0.0.1-security",
     "fs-extra": "^9.0.1",
+    "imagizer": "^0.4.4",
     "memejs": "^2.0.1",
     "nodemon": "^2.0.12",
+    "request": "^2.88.2",
     "typescript": "^4.3.5"
   },
   "repository": {
@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.12",
-    "@types/node": "^16.7.1"
+    "@types/node": "^16.7.1",
+    "@types/request": "^2.48.7"
   }
 }

@@ -12,7 +12,7 @@ export default class Embeds {
      * The colour of the embeds.
      * @type {string}
      */
-    static colour: string = '#7900C3'
+    static colour: string = '#E07D2C'
 
     /**
      * Creates an embed.
