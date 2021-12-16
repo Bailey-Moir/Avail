@@ -6,7 +6,7 @@ import { Guild, GuildMember, Message } from "discord.js";
 import fs from 'fs-extra';
 
 import Embeds from "../embeds";
-import Command, { CommandCatergory, CommandFlag } from "../types/command";
+import { Command, CommandCatergory, CommandFlag } from "../types/command";
 
 import config from '../../config.json';
 

@@ -28,7 +28,7 @@ export enum CommandFlag {
 /**
  * Command interface used by each command file.
  */
-export default interface Command {
+export type Command = {
     /**
      * Function called whenever a user uses the command.
      * @param {Message} message The message that the command was called with.

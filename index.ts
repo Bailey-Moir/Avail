@@ -8,7 +8,7 @@ import config from './config.json';
 
 import { commands } from "./src/storage";
 import logs from './src/logs';
-import Command, { CommandFlag } from "./src/types/command";
+import { Command, CommandFlag } from "./src/types/command";
 
 export const client = new Client({ fetchAllMembers: true });
 

@@ -1,11 +1,11 @@
 /**
- * Command that tells the user a NORMAL joke.
+ * Command that tells you all the logs.
  * @author Bailey Moir <bailey.p.moir@gmail.com>
  */
 import { Message, MessageEmbed } from "discord.js";
 import fs from 'fs-extra';
 
-import Command, { CommandCatergory } from "../types/command";
+import { Command, CommandCatergory, CommandFlag } from "../types/command";
 import Embeds from "../embeds";
 import { LogType, log } from "../types/logTypes";
  
@@ -14,6 +14,11 @@ import { dateToString } from "../utils";
 
 const command: Command = {
     callback: (message: Message, args: string[]) => {
+        if (!message.member.permissions.has('VIEW_AUDIT_LOG')) {
+            message.channel.send(Embeds.perms('view audit log'))
+            return;
+        }
+
         fs.readFile("./data.json", "utf8")
             .then((output: string) => {
                 let json = JSON.parse(output);
@@ -60,7 +65,8 @@ const command: Command = {
      name: "Logs",
      catergory: CommandCatergory.MODERATION,
      description: "Shows all the logs.",
-     example: `${config.prefix}logs`
+     example: `${config.prefix}logs`,
+     flags: [CommandFlag.NOT_DM]
  }
  
  module.exports = command;

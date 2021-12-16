@@ -6,14 +6,12 @@
 import { GuildMember, Message } from "discord.js";
 
 import Embeds from "../embeds";
-import Command, { CommandCatergory, CommandFlag } from "../types/command";
+import { Command, CommandCatergory, CommandFlag } from "../types/command";
 
 import config from '../../config.json';
 
 const command: Command = {
     callback: (message: Message, args: string[]) => {
-        if (message.member == null) return;
-
         if (!message.member.permissions.has('MUTE_MEMBERS')) {
             message.channel.send(Embeds.perms('mute members'))
             return;

@@ -2,7 +2,7 @@
  * @see Embeds
  * @author Bailey Moir <bailey.p.moir@gmail.com>
  */
-import { Message, MessageEmbed } from "discord.js";
+import { MessageEmbed } from "discord.js";
 
 /**
  * Static-based class used for templated embeds.

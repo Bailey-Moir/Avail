@@ -5,7 +5,7 @@
 import { Message, MessageEmbed } from 'discord.js';
 import { meme } from 'memejs';
 
-import Command, { CommandCatergory } from "../types/command";
+import { Command, CommandCatergory } from "../types/command";
 
 import config from '../../config.json';
 

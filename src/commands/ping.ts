@@ -4,7 +4,7 @@
  */
 import { Message } from "discord.js";
 
-import Command, { CommandCatergory } from "../types/command";
+import { Command, CommandCatergory } from "../types/command";
 
 import config from '../../config.json';
 import { client } from "../..";

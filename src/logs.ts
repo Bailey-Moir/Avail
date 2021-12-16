@@ -4,7 +4,7 @@
  */
 
 import fs from 'fs-extra';
-import { Collection, Guild, GuildChannel, GuildMember, Message, VoiceState } from 'discord.js';
+import { Collection, Guild, Message } from 'discord.js';
 
 import { log, LogType } from "./types/logTypes";
 import { client } from "..";

@@ -6,7 +6,7 @@ import { Message, MessageEmbed } from "discord.js";
 
 import Embeds from "../embeds";
 import { commands } from "../storage";
-import Command, { CommandCatergory, CommandCatergoryCount } from "../types/command";
+import { Command, CommandCatergory, CommandCatergoryCount } from "../types/command";
 
 import config from '../../config.json';
 import { titlify } from "../utils";
